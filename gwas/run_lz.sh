@@ -22,7 +22,7 @@ echo "#CHROM,BEGIN,END,MARKER_ID,NS,AC,CALLRATE,MAF,PVALUE,SCORE,N.CASE,N.CTRL,A
 
 cat /storage/szfeupe/Runs/650GTEx_estr/Analysis_by_Tissue/${TISSUE}/Lin_Reg_Out | \
     grep -w ${START} | grep -w ${GENE} | sed 's/chr//' | \
-    awk '{print $2 "\t" $4 "\t" $4 "\t" $2":"$4 "\t" "NS\tAC\tCALLRATE\tMAF\t" $12 "\t" "SCORE\tNCASE\tNCTRL\tAFCASE\tAFCTRL"}' >> ${PFILE}
+    awk '{print $2 "\t" $4-1 "\t" $4-1 "\t" $2":"$4 "\t" "NS\tAC\tCALLRATE\tMAF\t" $12 "\t" "SCORE\tNCASE\tNCTRL\tAFCASE\tAFCTRL"}' >> ${PFILE}
 cat /storage/szfeupe/Runs/650GTEx_estr/Analysis_by_Tissue/${TISSUE}/SNP_Analysis/Lin_Reg_Out | cut -f 1 --complement | \
     grep -w ${GENE} | sed 's/chr//' | \
     awk '{print $2 "\t" $4 "\t" $4 "\t" $2":"$4  "\t" "NS\tAC\tCALLRATE\tMAF\t" $12 "\t" "SCORE\tNCASE\tNCTRL\tAFCASE\tAFCTRL"}' |
@@ -38,7 +38,7 @@ echo "chr${CHROM}:$((START-1)),chr${CHROM}:$((START-1)),NA,1" | sed 's/,/\t/g' >
 /home/mgymrek/workspace/ssc-imputation/snpstr-ld/snp_str_ld_calculator.py \
     --str-vcf ${STRVCF} --snp-vcf ${SNPVCF} --loci-file ${SFILE} \
     --use-info-start --mincount 3 --usefilter --use-gb | \
-    grep -v locus1 | sed 's/:/\t/g' | \
+    grep -v locus1 | sed 's/:/\t/g' | sed 's/chr//' | \
     awk -v"chrom=$CHROM" '{print "chr"chrom":"$4 "\t" "chr"chrom":"$2-1 "\tNA\t" $9}' >> ${LFILE}
     
 # Run locus zoom on expression data
