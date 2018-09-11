@@ -12,6 +12,7 @@ dataset1=list(beta=data$gtex.beta, varbeta=data$gtex.varbeta, type="quant", sdY=
 dataset2=list(beta=data$gwas.beta, varbeta=data$gwas.varbeta, MAF=data$gwas.maf, N=N, type="quant")
 
 myres = coloc.abf(dataset1, dataset2)
+write.csv(myres[2], paste(cfile, ".coloc.txt", sep=""))
 x=myres[2][[1]]
 bestsnpdata=x[x$SNP.PP.H4==max(x$SNP.PP.H4),]
 print(bestsnpdata)
