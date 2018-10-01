@@ -31,11 +31,12 @@ cat ${OUTDIR}/tmp/str_gwas_ld_hg19_${PREFIX}.tab | grep -v locus1 | sed 's/:/\t/
     awk '{print $1 "\t" $2 "\t" $2+1 "\t" $0}' | intersectBed -a stdin -b ${OUTDIR}/tmp/str_gwas_overlap_${PREFIX}.bed -wa -wb | \
     awk '(($2==$15) && ($7==$20))' | cut -f 4,5,12,17,18,20,24- > ${OUTDIR}/str_gwas_ld_COMBINED_${PREFIX}.tab
 
+# ,chrom,str.start,str.end,gene,gene.name,dist.tss,motif,score,beta,pval,qval,num.e,causal,tissue_info
 ##### Combine with eSTRs
 cat ${OUTDIR}/str_gwas_ld_COMBINED_${PREFIX}.tab | awk '{print $1 "\t" $2 "\t" $2+1 "\t" $0}' | sed 's/chr//' > ${OUTDIR}/tmp/del1${PREFIX}
 cat ${CAUSAL} | sed 's/,/\t/g' | \
     grep -v chrom | \
-    awk '{print $2 "\t" $3-1 "\t" $4-1 "\t" $6 "\t" $9 "\t" $10 "\t" $12}' | sed 's/chr//' > ${OUTDIR}/tmp/del2${PREFIX}
+    awk '{print $2 "\t" $3-1 "\t" $4-1 "\t" $6 "\t" $9 "\t" $10 "\t" $15}' | sed 's/chr//' > ${OUTDIR}/tmp/del2${PREFIX}
 echo "chrom,start,LD,period,motif,snp.start,rsid,locus,gene.name,score,beta,tissue_info" | sed 's/,/\t/g' \
     > ${OUTDIR}/str_gwas_ld_COMBINED_eSTR_${PREFIX}.tab 
 intersectBed -a ${OUTDIR}/tmp/del1${PREFIX} -b ${OUTDIR}/tmp/del2${PREFIX} -wa -wb  | cut -f 4-11,15- | uniq \

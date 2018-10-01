@@ -7,10 +7,12 @@
 ./get_candidates.sh Height height
 ./get_coloc_trait.sh height quant 695647 > ${OUTDIR}/height_coloc_combined.tab
 ./summarize_coloc.sh height > ${OUTDIR}/height_coloc_summary.tab
+cat /storage/mgymrek/gtex/gwas/summarystats/coloc/height_coloc_summary.tab  | grep -v gene | awk '($12>0.5)' | sort -k12,12g | awk '{print $1":"$4 "\t" $2 "\t" $3 "\t" $5 "\t" $7 "\t" $12}'
 
 ./get_candidates.sh Schizophrenia scz_pgc
 ./get_coloc_trait.sh scz_pgc cc 0.33 > ${OUTDIR}/scz_pgc_coloc_combined.tab
 ./summarize_coloc.sh scz_pgc > ${OUTDIR}/scz_pgc_coloc_summary.tab
+cat /storage/mgymrek/gtex/gwas/summarystats/coloc/scz_pgc_coloc_summary.tab  | grep -v gene | awk '($12>0.5)' | sort -k12,12g | awk '{print $1":"$4 "\t" $2 "\t" $3 "\t" $5 "\t" $7 "\t" $12}'
 
 ./get_candidates.sh "Hemoglobin concentration" hgb_N172925
 ./get_coloc_trait.sh hgb_N172925 quant 172925 > ${OUTDIR}/hgb_coloc_combined.tab
@@ -33,3 +35,5 @@
 ./get_ld.sh height ENSG00000115556.9 Muscle-Skeletal 2:219482301
 ./get_ld.sh scz_pgc ENSG00000112893.5 WholeBlood 5:109038017
 ./get_ld.sh scz_pgc ENSG00000213996.8 Adipose-Visceral 19:19424949
+./get_ld.sh rbc_tmp ENSG00000178952.4 WholeBlood 16:28871190
+./get_ld.sh baso_p_gran_N170223 ENSG00000123643.8 Skin-SunExposed  5:150848654
