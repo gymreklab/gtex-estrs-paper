@@ -4,6 +4,15 @@ source params.sh
 # Make coloc files from all the summary stats files
 # Files have chrom,start,end,beta,sebeta,p,maf
 
+# IBD
+IBD=/storage/mgymrek/gtex/gwas/summarystats/EUR.IBD.gwas_info03_filtered.assoc 
+cat ${IBD} | grep -v Direction | \
+    awk '{print $1 "\t" $3 "\t" $3+1 "\t" log($9) "\t" $10/$9 "\t" $11 "\t" "NA"}' | \
+    sort -k1,1 -k2,2n | \
+    bgzip -c > ${OUTDIR}/ibd_coloc.bed.gz
+tabix -p bed ${OUTDIR}/ibd_coloc.bed.gz
+exit 1
+
 # HDL
 HDL=/storage/mgymrek/gtex/gwas/summarystats/HDL_Meta_ENGAGE_1000G.txt.gz
 zcat ${HDL} | grep -v pos | \
@@ -28,6 +37,7 @@ zcat ${SCZ_PGC} | grep -v hg19chrc | \
     sed 's/chr//' | \
     bgzip -c > ${OUTDIR}/scz_pgc_coloc.bed.gz
 tabix -p bed ${OUTDIR}/scz_pgc_coloc.bed.gz
+
 
 # Blood traits
 HGB_ASTLE=/storage/mgymrek/gtex/gwas/summarystats/hgb_N172925_wide_form.tsv.gz

@@ -7,7 +7,7 @@ for line in sys.stdin.readlines():
     items = line.strip().split()
     tdata = items[col-1].split(";")
     
-    best_score = 0
+    best_score = -1
     best_tissue = "NA"
     
     for item in tdata:

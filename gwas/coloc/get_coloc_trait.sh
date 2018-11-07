@@ -12,8 +12,7 @@ SUMSTATS=$OUTDIR/${PREFIX}_coloc.bed.gz
 while IFS='' read -r line || [[ -n "$line" ]]; do
     gene=$(echo $line | cut -f 1 -d' ')
     tissue=$(echo $line | cut -f 2 -d' ')
-    rsid=$(echo $line | cut -f 3 -d' ')
-    genename=$(echo $line | cut -f 4 -d' ')
+    genename=$(echo $line | cut -f 3 -d' ')
 
     gtexfile=${OUTDIR}/tmp/${PREFIX}_${gene}_${tissue}_gtex.txt
     gwasfile=${OUTDIR}/tmp/${PREFIX}_${gene}_${tissue}_gwas.txt
@@ -45,6 +44,6 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 	exit 1
     fi
     # print results to screen
-    echo $genename $rsid $tissue $(cat $resfile | head -n 3 | tail -n 1 | awk -F" " '{print $NF}' | sed 's/"//')
+    echo $genename $tissue $(cat $resfile | head -n 3 | tail -n 1 | awk -F" " '{print $NF}' | sed 's/"//')
 done < "$CANDFILE"
 

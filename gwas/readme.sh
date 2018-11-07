@@ -4,5 +4,5 @@
 ./get_gwas_overlaps.sh
 
 # Filter gwas tables
-./filter_gwas.sh GWASCAT3
+./filter_gwas.sh SCZ2
 
