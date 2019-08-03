@@ -18,8 +18,6 @@ do
 	cat /storage/mgymrek/gtex-estrs/revision/strreg/${tissue}_strreg.tab  | \
 	    grep -w chr${chrom} | \
 	    grep -v gene | cut -f 1 | uniq > ${OUTDIR}/${tissue}/chr${chrom}/allgenes.txt
-#	cat ${MASHR}/output-strs/sig-bytissue/${tissue}-genelevel-estrs.tsv | \
-#	    grep _chr${chrom}_ | cut -f 1 -d'_' | sort | uniq > ${OUTDIR}/${tissue}/chr${chrom}/allgenes.txt
 	split -l ${BATCHSIZE} ${OUTDIR}/${tissue}/chr${chrom}/allgenes.txt ${OUTDIR}/${tissue}/chr${chrom}/batch_
     done
 done
