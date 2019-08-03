@@ -1,0 +1,8 @@
+{
+    "image": "gymreklab/gtex-estrs-snpreg",
+    "vcpus": 1,
+    "memory": 2000,
+    "command": [],
+    "jobRoleArn": "arn:aws:iam::369425333806:role/batchJobRole",
+    "user": "root"
+}
