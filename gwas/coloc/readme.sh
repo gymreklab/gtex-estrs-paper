@@ -28,3 +28,8 @@ do
     cat ${OUTDIR}/${trait}_coloc_results.tab | grep -v gene | \
 	awk -F"\t" -v"trait=$trait" '{print $1":"$5 "\t" $2 "\t" $3 "\t" $4 "\t" $6 "\t" $7"\t" $8 "\t" $13 "\t" trait}'
 done > /storage/mgymrek/gtex-estrs/revision/figures/SuppTable_Coloc.tsv
+
+# Numbers
+cat /storage/mgymrek/gtex-estrs/revision/figures/SuppTable_Coloc.tsv | awk -F"\t" '($7>=0.1 && $8>=0.9)' | wc -l # 28 in moderate LD and coloc>0.9
+cat /storage/mgymrek/gtex-estrs/revision/figures/SuppTable_Coloc.tsv | awk -F"\t" '($7>=0.1 && $8>=0.5)' | wc -l # 62 in moderate LD and coloc>0.5
+cat /storage/mgymrek/gtex-estrs/revision/figures/SuppTable_Coloc.tsv | awk -F"\t" '($6>=0.5 && $7>=0.1 && $8>=0.5)' | wc -l # 40 in moderate LD and coloc>0.5 and CAVIAR>0.5

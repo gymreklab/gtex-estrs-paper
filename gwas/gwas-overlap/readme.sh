@@ -16,7 +16,13 @@
 
 # Print overlaps
 cat /storage/mgymrek/gtex-estrs/revision/figures/NCBI-072419_SuppDataset.tsv | cut -f 1,2 | sort | uniq | wc -l # 1381
-cat /storage/mgymrek/gtex-estrs/revision/figures/NCBI-072419_SuppDataset.tsv | grep -v nan | grep -v None | awk '($8>0.1)' | cut -f 1,2 | sort | uniq | wc -l # 847
-cat /storage/mgymrek/gtex-estrs/revision/figures/NCBI-072419_SuppDataset.tsv | grep -v nan | grep -v None | awk '($8>0.8)' | cut -f 1,2 | sort | uniq | wc -l # 65
+cat /storage/mgymrek/gtex-estrs/revision/figures/NCBI-072419_SuppDataset.tsv | grep -v nan | grep -v None | awk '($8>0.1)' | cut -f 1,2 | sort | uniq | wc -l# 847
+cat /storage/mgymrek/gtex-estrs/revision/figures/NCBI-072419_SuppDataset.tsv | grep -v nan | grep -v None | awk '($8>0.8)' | cut -f 1,2 | sort | uniq | wc -l# 65
+
+# Print overlaps now for CAVIAR >0.5
+cat /storage/mgymrek/gtex-estrs/revision/figures/NCBI-072419_SuppDataset.tsv | grep -v nan | grep -v None | awk '($6>0.5)' | awk '($8>0.1)' | cut -f 1,2 | sort | uniq | wc -l
+# 403
+cat /storage/mgymrek/gtex-estrs/revision/figures/NCBI-072419_SuppDataset.tsv | grep -v nan | grep -v None | awk '($6>0.5)' | awk '($8>0.8)' | cut -f 1,2 | sort | uniq | wc -l
+# 26
 
 # See ./prepare_gwas_hits.sh and ./get_gwas_candidates.sh for trait-specific
